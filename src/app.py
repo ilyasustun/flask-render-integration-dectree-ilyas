@@ -9,7 +9,10 @@ app = Flask(__name__)
 app.debug = True  # Enable debug mode
 
 try:
-    model = load(open("/workspaces/flask-render-integration-dectree-ilyas/models/decision_tree_classifier_default_42.sav", "rb"))
+    # Get the directory where app.py is located
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    model_path = os.path.join(BASE_DIR, "models", "decision_tree_classifier_default_42.sav")
+    model = load(open(model_path, "rb"))
 except Exception as e:
     print(f"Error loading model: {str(e)}")
     traceback.print_exc()
